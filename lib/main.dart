@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'calculator.dart';
 import 'notes.dart';
 import 'search.dart';
+import 'game.dart';
 
 void main() {
   runApp(MyApp());
@@ -19,6 +20,7 @@ class _MyAppState extends State<MyApp> {
     Notes(),
     Search(),
     Calculator(),
+    Game(),
   ];
 
   void _onItemTapped(int index) {
@@ -35,6 +37,7 @@ class _MyAppState extends State<MyApp> {
         appBar: AppBar(
           title: Text('Tab Bar App'),
         ),
+        backgroundColor: Color.fromARGB(255, 168, 206, 244), //这里设置为灰色
         body: _tabList[_selectedTabIndex],
         bottomNavigationBar: BottomNavigationBar(
           items: [
@@ -49,6 +52,10 @@ class _MyAppState extends State<MyApp> {
             BottomNavigationBarItem(
               icon: Icon(Icons.calculate),
               label: 'Calculator',
+            ),
+            BottomNavigationBarItem(
+              icon:Icon(Icons.gamepad),
+              label: 'Game',
             ),
           ],
           currentIndex: _selectedTabIndex,
