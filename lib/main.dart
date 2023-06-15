@@ -35,26 +35,26 @@ class _MyAppState extends State<MyApp> {
       title: 'Tab Bar App',
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Tab Bar App'),
+          title: const Text('Tab Bar App'),
         ),
-        backgroundColor: Color.fromARGB(255, 168, 206, 244), //这里设置为灰色
+        backgroundColor: const Color.fromARGB(255, 168, 206, 244), //这里设置为灰色
         body: _tabList[_selectedTabIndex],
         bottomNavigationBar: BottomNavigationBar(
-          items: [
+          items: const [
             BottomNavigationBarItem(
-              icon: Icon(Icons.note),
+              icon: Icon(Icons.note, size: 50, color: Colors.blue),
               label: 'Notes',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.search),
+              icon: Icon(Icons.search, size: 50, color: Colors.black),
               label: 'Search',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.calculate),
+              icon: Icon(Icons.calculate, size: 50, color: Colors.purple),
               label: 'Calculator',
             ),
             BottomNavigationBarItem(
-              icon:Icon(Icons.gamepad),
+              icon:Icon(Icons.gamepad, size: 50, color: Colors.green),
               label: 'Game',
             ),
           ],

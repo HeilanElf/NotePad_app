@@ -53,6 +53,12 @@ android {
         versionName flutterVersionName
     }
 
+    flutter {
+    ...
+    buildGradleVersion = '3.5.0'
+    ...
+    }
+
     buildTypes {
         release {
             // TODO: Add your own signing config for the release build.
