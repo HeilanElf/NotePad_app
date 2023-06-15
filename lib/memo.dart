@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MemoApp());
+  runApp(const MemoApp());
 }
 
 class MemoApp extends StatelessWidget {
+  const MemoApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -65,20 +67,22 @@ class _MemoScreenState extends State<MemoScreen> {
           ),
           Expanded(
             child: ListView.builder(
-              itemCount: memos.length,
-              itemBuilder: (context, index) {
-                return ListTile(
-                  title: Text(memos[index]),
-                  trailing: IconButton(
-                    icon: Icon(Icons.delete),
-                    onPressed: () {
-                      deleteMemo(index);
-                    },
-                  ),
-                );
+            itemCount: memos.length,
+            itemBuilder: (context, index) {
+            final memoIndex = memos.length - index;
+            return ListTile(
+            title: Text('Memo $memoIndex: ${memos[index]}'),
+            trailing: IconButton(
+            icon: Icon(Icons.delete),
+            onPressed: () {
+            deleteMemo(index);
               },
-            ),
-          ),
+              ),
+             );
+        },
+        ),
+        ),
+
         ],
       ),
     );
