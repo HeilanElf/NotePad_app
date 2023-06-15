@@ -11,6 +11,7 @@ class _SearchState extends State<Search> {
     'Walk the dog',
     'Workout',
     'Prepare dinner',
+    'abcdefghijklmnopqrstuvwxyz',
   ];
 
   List<String> _searchedNotes = [];
