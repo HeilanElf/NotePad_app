@@ -6,6 +6,7 @@ import 'calculator.dart';
 import 'ToDoList.dart';
 import 'memo.dart';
 import 'game.dart';
+import 'change.dart';
 
 void main() {
   runApp(const MyApp());
@@ -26,7 +27,8 @@ class _MyAppState extends State<MyApp> {
    // MemoSearchScreen(),
     TodoListPage(),
     Calculator(),
-    Game(),   
+    Game(),
+    Converter(),   
   ];
 
   void _onItemTapped(int index) {
@@ -66,6 +68,10 @@ class _MyAppState extends State<MyApp> {
             BottomNavigationBarItem(
               icon:Icon(Icons.gamepad, size: 50, color: Colors.black),
               label: 'Game',
+            ),
+             BottomNavigationBarItem(
+              icon:Icon(Icons.change_circle, size: 50, color: Colors.black),
+              label: 'Change',
             ),
           ],
           currentIndex: _selectedTabIndex,
