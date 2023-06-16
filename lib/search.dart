@@ -5,6 +5,7 @@ class MemoSearchScreen extends StatefulWidget {
   const MemoSearchScreen({Key? key}) : super(key: key);
 
   @override
+  // ignore: library_private_types_in_public_api
   _MemoSearchScreenState createState() => _MemoSearchScreenState();
 }
 
@@ -48,7 +49,7 @@ class _MemoSearchScreenState extends State<MemoSearchScreen> {
 
   Widget _buildSearchTextField() {
     return TextField(
-      decoration: InputDecoration(
+      decoration: const InputDecoration(
         labelText: 'Search Memo',
         prefixIcon: Icon(Icons.search),
         contentPadding: EdgeInsets.symmetric(horizontal: 16),
@@ -65,15 +66,15 @@ class _MemoSearchScreenState extends State<MemoSearchScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Memo App Search'),
+        title: const Text('Memo App Search'),
       ),
       body: Column(
         children: [
           Padding(
-            padding: EdgeInsets.all(16.0),
+            padding: const EdgeInsets.all(16.0),
             child: TextField(
               controller: memoController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Add Memo',
               ),
             ),
@@ -82,7 +83,7 @@ class _MemoSearchScreenState extends State<MemoSearchScreen> {
             onPressed: () {
               addMemo(memoController.text);
             },
-            child: Text('Add'),
+            child: const Text('Add'),
           ),
           _buildSearchTextField(),
           Expanded(
@@ -98,7 +99,7 @@ class _MemoSearchScreenState extends State<MemoSearchScreen> {
                 return ListTile(
                   title: Text('Memo $memoIndex: ${memos[index]}'),
                   trailing: IconButton(
-                    icon: Icon(Icons.delete),
+                    icon: const Icon(Icons.delete),
                     onPressed: () {
                       deleteMemo(index);
                     },
@@ -112,57 +113,3 @@ class _MemoSearchScreenState extends State<MemoSearchScreen> {
     );
   }
 }
-
-
-/*import 'package:flutter/material.dart';
-
-class Search extends StatefulWidget {
-  @override
-  _SearchState createState() => _SearchState();
-}
-
-class _SearchState extends State<Search> {
-  List<String> _notes = [
-    'Buy milk',
-    'Walk the dog',
-    'Workout',
-    'Prepare dinner',
-    'abcdefghijklmnopqrstuvwxyz',
-  ];
-
-  List<String> _searchedNotes = [];
-
-  void _onSearch(String value) {
-    setState(() {
-      _searchedNotes = List.from(_notes.where((note) => note.contains(value)));
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Padding(
-          padding: const EdgeInsets.all(16),
-          child: TextField(
-            onChanged: _onSearch,
-            decoration: InputDecoration(
-              hintText: 'Search notes',
-              prefixIcon: Icon(Icons.search),
-            ),
-          ),
-        ),
-        Expanded(
-          child: ListView.builder(
-            itemCount: _searchedNotes.length,
-            itemBuilder: (context, index) {
-              return ListTile(
-                title: Text(_searchedNotes[index]),
-              );
-            },
-          ),
-        ),
-      ],
-    );
-  }
-}*/
