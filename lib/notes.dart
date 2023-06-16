@@ -136,6 +136,7 @@ class _NotesState extends State<Notes> {
     );
   }
 
+  // ignore: prefer_final_fields
   String _searchTerm = '';
 
   @override
