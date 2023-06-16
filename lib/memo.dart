@@ -15,13 +15,16 @@ class MemoApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MemoScreen(),
+      home: const MemoScreen(),
     );
   }
 }
 
 class MemoScreen extends StatefulWidget {
+  const MemoScreen({Key? key}) : super(key: key);
+
   @override
+  // ignore: library_private_types_in_public_api
   _MemoScreenState createState() => _MemoScreenState();
 }
 
@@ -39,6 +42,7 @@ class _MemoScreenState extends State<MemoScreen> {
       setState(() {
         _prefs = prefs;
         memos = List<String>.from(_prefs.getStringList(_memoKey) ?? []);
+        memoController = TextEditingController();
       });
     });
   }
@@ -62,15 +66,15 @@ class _MemoScreenState extends State<MemoScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Memo App'),
+        title: const Text('Memo App'),
       ),
       body: Column(
         children: [
           Padding(
-            padding: EdgeInsets.all(16.0),
+            padding: const EdgeInsets.all(16.0),
             child: TextField(
               controller: memoController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Add Memo',
               ),
             ),
@@ -79,7 +83,7 @@ class _MemoScreenState extends State<MemoScreen> {
             onPressed: () {
               addMemo(memoController.text);
             },
-            child: Text('Add'),
+            child: const Text('Add'),
           ),
           Expanded(
             child: ListView.builder(
@@ -88,11 +92,56 @@ class _MemoScreenState extends State<MemoScreen> {
                 final memoIndex = memos.length - index;
                 return ListTile(
                   title: Text('Memo $memoIndex: ${memos[index]}'),
-                  trailing: IconButton(
-                    icon: Icon(Icons.delete),
-                    onPressed: () {
-                      deleteMemo(index);
-                    },
+                  trailing: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      IconButton(
+                        icon: const Icon(Icons.edit),
+                        onPressed: () {
+                          memoController.text = memos[index];
+                          showDialog(
+                            context: context,
+                            builder: (context) {
+                              return AlertDialog(
+                                title: const Text('Edit Memo'),
+                                content: TextField(
+                                  controller: memoController,
+                                  decoration: const InputDecoration(
+                                    labelText: 'Edit Memo',
+                                  ),
+                                ),
+                                actions: [
+                                  ElevatedButton(
+                                    onPressed: () {
+                                      setState(() {
+                                        memos[index] =
+                                            memoController.text;
+                                        _prefs.setStringList(
+                                            _memoKey, memos);
+                                      });
+                                      Navigator.pop(context);
+                                    },
+                                    child: const Text('Save'),
+                                  ),
+                                  ElevatedButton(
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                    },
+                                    child: const Text('Cancel'),
+                                  ),
+                                ],
+                              );
+                            },
+                          );
+                        },
+                      ),
+                      IconButton(
+                        icon: Icon(Icons.delete),
+                        onPressed: () {
+                          deleteMemo(index);
+                        },
+                      ),
+                    ],
                   ),
                 );
               },
