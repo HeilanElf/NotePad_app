@@ -33,6 +33,7 @@ class _NotesState extends State<Notes> {
   _noteController.clear();
 }
 
+
   void _removeNoteAtIndex(int index) async {
     setState(() {
       _notes.removeAt(index);
@@ -119,7 +120,7 @@ class _NotesState extends State<Notes> {
                 padding: EdgeInsets.only(left: 16),
                 child: Icon(
                   Icons.delete,
-                  color: Colors.black,
+                  color: Colors.white,
                 ),
               ),
             ),
