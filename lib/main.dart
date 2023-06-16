@@ -26,7 +26,7 @@ class _MyAppState extends State<MyApp> {
   List<Widget> _tabList = [
     MemoApp(),
     TodoListPage(),
-    Search(),
+    MemoSearchScreen(),
     Calculator(),
     Game(),   
   ];
