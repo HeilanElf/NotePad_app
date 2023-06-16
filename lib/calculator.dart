@@ -1,4 +1,203 @@
 import 'package:flutter/material.dart';
+import 'package:math_expressions/math_expressions.dart';
+
+class Calculator extends StatefulWidget {
+  @override
+  _CalculatorState createState() => _CalculatorState();
+}
+
+class _CalculatorState extends State<Calculator> {
+  String _expression = '';
+  bool _isCalculated = false;
+
+  void _onDigitButtonPressed(String text) {
+    setState(() {
+      if (_isCalculated) {
+        _expression = '';
+        _isCalculated = false;
+      }
+      _expression += text;
+    });
+  }
+
+  void _onOperatorButtonPressed(String text) {
+    setState(() {
+      if (_isCalculated) {
+        _isCalculated = false;
+      }
+      _expression += ' ' + text + ' ';
+    });
+  }
+
+  void _onClearButtonPressed() {
+    setState(() {
+      _expression = '';
+      _isCalculated = false;
+    });
+  }
+
+  void _onDeleteButtonPressed() {
+    setState(() {
+      if (_expression.isNotEmpty) {
+        _expression = _expression.substring(0, _expression.length - 1);
+      }
+    });
+  }
+
+  void _onEqualsButtonPressed() {
+    setState(() {
+      Parser p = Parser();
+      Expression exp = p.parse(_expression);
+
+      ContextModel cm = ContextModel();
+      double eval = exp.evaluate(EvaluationType.REAL, cm);
+
+      _expression = eval.toString();
+      _isCalculated = true;
+    });
+  }
+
+  void _onNegateButtonPressed() {
+    setState(() {
+      final lastChar = _expression.characters.last;
+      if (lastChar == '-') {
+        _expression = _expression.substring(0, _expression.length - 1);
+      } else {
+        _expression += '-';
+      }
+    });
+  }
+
+  void _onPercentButtonPressed() {
+    setState(() {
+      if (_expression.isEmpty) return;
+
+      final lastChar = _expression.characters.last;
+      if (lastChar == '%') return;
+
+      final percentValue = double.parse(_expression) / 100.0;
+      _expression = percentValue.toString();
+    });
+  }
+
+  void _onParenthesisButtonPressed() {
+    setState(() {
+      if (_isCalculated) {
+        _isCalculated = false;
+      }
+      _expression += '(';
+    });
+  }
+
+  void _onRightParenthesisButtonPressed() {
+    setState(() {
+      _expression += ')';
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Expanded(
+          child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: Align(
+              alignment: Alignment.bottomRight,
+              child: Text(
+                _expression,
+                style: Theme.of(context).textTheme.headline6,
+                textAlign: TextAlign.right,
+              ),
+            ),
+          ),
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            _buildCalculatorButton('C', onPressed: _onClearButtonPressed),
+            _buildCalculatorButton('<', onPressed: _onDeleteButtonPressed),
+            _buildCalculatorButton('&plusmn;', onPressed: _onNegateButtonPressed),
+            _buildCalculatorButton('%', onPressed: _onPercentButtonPressed),
+          ],
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            _buildCalculatorButton('7', onPressed: () => _onDigitButtonPressed('7')),
+            _buildCalculatorButton('8', onPressed: () => _onDigitButtonPressed('8')),
+            _buildCalculatorButton('9', onPressed: () => _onDigitButtonPressed('9')),
+            _buildCalculatorButton('&divide;', onPressed: () => _onOperatorButtonPressed('/')),
+          ],
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            _buildCalculatorButton('4', onPressed: () => _onDigitButtonPressed('4')),
+            _buildCalculatorButton('5', onPressed: () => _onDigitButtonPressed('5')),
+            _buildCalculatorButton('6', onPressed: () => _onDigitButtonPressed('6')),
+            _buildCalculatorButton('&times;', onPressed: () => _onOperatorButtonPressed('*')),
+          ],
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            _buildCalculatorButton('1', onPressed: () => _onDigitButtonPressed('1')),
+            _buildCalculatorButton('2', onPressed: () => _onDigitButtonPressed('2')),
+            _buildCalculatorButton('3', onPressed: () => _onDigitButtonPressed('3')),
+            _buildCalculatorButton('-', onPressed: () => _onOperatorButtonPressed('-')),
+          ],
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            _buildCalculatorButton('(', onPressed: _onParenthesisButtonPressed),
+            _buildCalculatorButton('0', onPressed: () => _onDigitButtonPressed('0')),
+            _buildCalculatorButton('.', onPressed: () => _onDigitButtonPressed('.')),
+            _buildCalculatorButton('+', onPressed: () => _onOperatorButtonPressed('+')),
+            _buildCalculatorButton(')', onPressed: _onRightParenthesisButtonPressed),
+          ],
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 32),
+          child: SizedBox(
+            width: double.infinity,
+            height: 48,
+            child: RaisedButton(
+              color: Colors.blue,
+              textColor: Colors.white,
+              child: Text(
+                '=',
+                style: TextStyle(fontSize: 24),
+              ),
+              onPressed: _onEqualsButtonPressed,
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildCalculatorButton(String text, {required VoidCallback onPressed}) {
+    return SizedBox(
+      width: 64,
+      height: 64,
+      child: FlatButton(
+        shape: CircleBorder(),
+        child: Text(
+          text,
+          style: TextStyle(fontSize: 24),
+        ),
+        onPressed: onPressed,
+      ),
+    );
+  }
+}
+
+
+
+/*
+import 'package:flutter/material.dart';
 
 class Calculator extends StatefulWidget {
   @override
@@ -147,4 +346,4 @@ class _CalculatorState extends State<Calculator> {
       onPressed: text == 'C' ? onPressed as void Function()? : () => onPressed(),
     );
   }
-}
+}*/

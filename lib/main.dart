@@ -1,12 +1,11 @@
 // ignore_for_file: library_private_types_in_public_api
-
+//import 'search.dart';
 import 'package:flutter/material.dart';
 import 'package:gitpod_flutter_quickstart/ToDoList.dart';
 import 'package:gitpod_flutter_quickstart/memo.dart';
 import 'calculator.dart';
 import 'ToDoList.dart';
 import 'memo.dart';
-import 'search.dart';
 import 'game.dart';
 
 void main() {
@@ -25,8 +24,8 @@ class _MyAppState extends State<MyApp> {
 
   List<Widget> _tabList = [
     MemoApp(),
+   // MemoSearchScreen(),
     TodoListPage(),
-    MemoSearchScreen(),
     Calculator(),
     Game(),   
   ];
@@ -40,10 +39,10 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Tab Bar App',
+      title: 'Tool APP Demo',
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('Tab Bar App'),
+          title: const Text('Tool APP Demo'),
         ),
         backgroundColor: const Color.fromARGB(255, 168, 206, 244), //这里设置为灰色
         body: _tabList[_selectedTabIndex],
@@ -53,13 +52,13 @@ class _MyAppState extends State<MyApp> {
               icon: Icon(Icons.note, size: 50, color: Colors.black),
               label: 'Memo_Notes',
             ),
+           // BottomNavigationBarItem(
+             // icon: Icon(Icons.search, size: 50, color: Colors.black),
+              //label: 'Search',
+            //),
             BottomNavigationBarItem(
               icon: Icon(Icons.done, size: 50, color: Colors.black),
               label: 'To_do_list',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.search, size: 50, color: Colors.black),
-              label: 'Search',
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.calculate, size: 50, color: Colors.black),
