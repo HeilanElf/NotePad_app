@@ -1,8 +1,11 @@
 // ignore_for_file: library_private_types_in_public_api
 
 import 'package:flutter/material.dart';
+import 'package:gitpod_flutter_quickstart/ToDoList.dart';
+import 'package:gitpod_flutter_quickstart/memo.dart';
 import 'calculator.dart';
-import 'notes.dart';
+import 'ToDoList.dart';
+import 'memo.dart';
 import 'search.dart';
 import 'game.dart';
 
@@ -21,10 +24,11 @@ class _MyAppState extends State<MyApp> {
   int _selectedTabIndex = 0;
 
   List<Widget> _tabList = [
-    Notes(),
+    MemoApp(),
+    TodoListPage(),
     Search(),
     Calculator(),
-    Game(),
+    Game(),   
   ];
 
   void _onItemTapped(int index) {
@@ -46,19 +50,23 @@ class _MyAppState extends State<MyApp> {
         bottomNavigationBar: BottomNavigationBar(
           items: const [
             BottomNavigationBarItem(
-              icon: Icon(Icons.note, size: 50, color: Colors.blue),
-              label: 'Notes',
+              icon: Icon(Icons.note, size: 50, color: Colors.black),
+              label: 'Memo_Notes',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.done, size: 50, color: Colors.black),
+              label: 'To_do_list',
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.search, size: 50, color: Colors.black),
               label: 'Search',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.calculate, size: 50, color: Colors.purple),
+              icon: Icon(Icons.calculate, size: 50, color: Colors.black),
               label: 'Calculator',
             ),
             BottomNavigationBarItem(
-              icon:Icon(Icons.gamepad, size: 50, color: Colors.green),
+              icon:Icon(Icons.gamepad, size: 50, color: Colors.black),
               label: 'Game',
             ),
           ],
