@@ -117,8 +117,8 @@ class _CalculatorState extends State<Calculator> {
           children: [
             _buildCalculatorButton('C', onPressed: _onClearButtonPressed),
             _buildCalculatorButton('<', onPressed: _onDeleteButtonPressed),
-            _buildCalculatorButton('&plusmn;', onPressed: _onNegateButtonPressed),
             _buildCalculatorButton('%', onPressed: _onPercentButtonPressed),
+            _buildCalculatorButton('.', onPressed: () => _onDigitButtonPressed('.')),
           ],
         ),
         Row(
@@ -127,7 +127,7 @@ class _CalculatorState extends State<Calculator> {
             _buildCalculatorButton('7', onPressed: () => _onDigitButtonPressed('7')),
             _buildCalculatorButton('8', onPressed: () => _onDigitButtonPressed('8')),
             _buildCalculatorButton('9', onPressed: () => _onDigitButtonPressed('9')),
-            _buildCalculatorButton('&divide;', onPressed: () => _onOperatorButtonPressed('/')),
+            _buildCalculatorButton('/', onPressed: () => _onOperatorButtonPressed('/')),
           ],
         ),
         Row(
@@ -136,7 +136,7 @@ class _CalculatorState extends State<Calculator> {
             _buildCalculatorButton('4', onPressed: () => _onDigitButtonPressed('4')),
             _buildCalculatorButton('5', onPressed: () => _onDigitButtonPressed('5')),
             _buildCalculatorButton('6', onPressed: () => _onDigitButtonPressed('6')),
-            _buildCalculatorButton('&times;', onPressed: () => _onOperatorButtonPressed('*')),
+            _buildCalculatorButton('*', onPressed: () => _onOperatorButtonPressed('*')),
           ],
         ),
         Row(
@@ -153,9 +153,8 @@ class _CalculatorState extends State<Calculator> {
           children: [
             _buildCalculatorButton('(', onPressed: _onParenthesisButtonPressed),
             _buildCalculatorButton('0', onPressed: () => _onDigitButtonPressed('0')),
-            _buildCalculatorButton('.', onPressed: () => _onDigitButtonPressed('.')),
-            _buildCalculatorButton('+', onPressed: () => _onOperatorButtonPressed('+')),
             _buildCalculatorButton(')', onPressed: _onRightParenthesisButtonPressed),
+            _buildCalculatorButton('+', onPressed: () => _onOperatorButtonPressed('+')),
           ],
         ),
         Padding(
