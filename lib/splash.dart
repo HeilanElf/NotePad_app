@@ -55,7 +55,7 @@ class _SplashScreenState extends State<SplashScreen> {
         children: [
           // 背景图片
           Image.network(
-            'https://raw.githubusercontent.com/lixianx/my_NetFeach/main/%E9%A1%B5%E9%9D%A2%201%20(2).png',
+            'https://raw.githubusercontent.com/lixianx/my_NetFeach/main/mysplash.jpeg',
             fit: BoxFit.cover,
           ),
           // 右上角倒计时和跳过按钮
